@@ -17,14 +17,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Mkdir2
+    - name: Mkdir
       run: mkdir ./deploy
     - name: Copy
       run: ls | grep -v '^\(\.\{1,2\}\|deploy\)$' | xargs cp -at deploy
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git
     - name: Move
-      run: cp -r ./bilibili-api/bilibili_api/data/* ./deploy/bilibili-api
+      run: cp -rf ./bilibili-api/bilibili_api/data/* ./deploy/bilibili-api-python
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
