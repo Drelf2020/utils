@@ -25,10 +25,8 @@ jobs:
       run: ls | grep -v '^deploy$' | xargs cp -at deploy
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git
-    - name: LS
-      run: ls bilibili-api
     - name: Move
-      run: cp ./bilibili-api/data ./deploy/data
+      run: cp ./bilibili-api/bilibili-api/data ./deploy/data
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
