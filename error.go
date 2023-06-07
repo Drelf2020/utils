@@ -9,7 +9,7 @@ func CheckErr(err error) bool {
 	return err != nil
 }
 
-// 存在错误则 panic
+// 存在错误则  panic
 func PanicErr(err error) {
 	if CheckErr(err) {
 		panic(err)

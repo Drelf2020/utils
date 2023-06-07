@@ -32,7 +32,7 @@ func GetConfig() {
 	for _, config := range configs {
 		ac := auto(*config)
 		if ac == nil {
-			utils.GetLog().Errorf("不支持的文件 %v", config.Path)
+			utils.GetLog().Errorf("不支持文件 %v", config.Path)
 		} else if !utils.FileExists(config.Path) {
 			ac.Write()
 		} else {
