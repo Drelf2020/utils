@@ -17,16 +17,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Mkdir1
+      run: mkdir ./data
+    - name: Mkdir2
+      run: mkdir ./deploy
     - name: Copy
       run: cp ./* ./deploy
     - name: Clone
-      run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git ./bilibili-api
+      run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git
     - name: LS
       run: ls bilibili-api
     - name: Move
-      run: cp ./bilibili-api/bilibili-api/data ./data
+      run: cp ./bilibili-api/data ./deploy/data
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: main # The branch the action should deploy to.
-        folder: .
+        folder: ./deploy
