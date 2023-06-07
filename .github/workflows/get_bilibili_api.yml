@@ -17,10 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Make
-      run: mkdir deploy
-    - name: Move1
-      run: mv ./* ./deploy
+    - name: Copy
+      run: cp ./* ./deploy
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git ./bilibili-api
     - name: LS
