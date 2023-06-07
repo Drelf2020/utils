@@ -22,7 +22,7 @@ jobs:
     - name: Mkdir2
       run: mkdir ./deploy
     - name: Copy
-      run: cp -r ./* ./deploy
+      run: ls | grep -v '^deploy$' | xargs cp -at deploy
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git
     - name: LS
