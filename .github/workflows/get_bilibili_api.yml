@@ -19,6 +19,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git ./bilibili-api
+    - name: LS
+      run: ls
     - name: Move
       run: cp ./bilibili-api/bilibili-api/data ./data
     - name: Deploy
