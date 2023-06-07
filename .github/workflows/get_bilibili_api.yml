@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Move1
-      run: mv ./ ./deploy
+      run: mv . ./deploy
     - name: Clone
       run: git clone -b main https://github.com/Nemo2011/bilibili-api.git
     - name: Move2
