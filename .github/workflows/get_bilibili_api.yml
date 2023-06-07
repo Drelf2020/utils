@@ -1,0 +1,21 @@
+name: get_bilibili_api
+
+# Controls when the workflow will run
+on:
+  push:
+  schedule:
+    - cron: '0 0 1 * *'
+  
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+        BASE_URL: /
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Clone
+      run: git clone -b main https://github.com/Nemo2011/bilibili-api.git ./bilibili-api
