@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Mkdir1
-      run: mkdir ./data
+      run: mkdir ./bilibili-api
     - name: Mkdir2
       run: mkdir ./deploy
     - name: Copy
@@ -26,7 +26,7 @@ jobs:
     - name: Clone
       run: git clone -b dev https://github.com/Nemo2011/bilibili-api.git
     - name: Move
-      run: cp -r ./bilibili-api/bilibili_api/data ./deploy/data
+      run: cp -r ./bilibili-api/bilibili_api/data/* ./deploy/bilibili-api
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
