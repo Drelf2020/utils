@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Make
+      run: mkdir deploy
     - name: Move1
       run: mv ./* ./deploy
     - name: Clone
