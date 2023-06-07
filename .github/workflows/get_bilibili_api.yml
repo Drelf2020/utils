@@ -17,14 +17,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Move1
-      run: mv . ./deploy
     - name: Clone
-      run: git clone -b main https://github.com/Nemo2011/bilibili-api.git
+      run: git clone -b main https://github.com/Nemo2011/bilibili-api.git ./bilibili-api
     - name: Move2
-      run: mv ./bilibili-api/data ./deploy
+      run: mv ./bilibili-api/bilibili-api/data ./data
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         branch: main # The branch the action should deploy to.
-        folder: deploy
+        folder: .
