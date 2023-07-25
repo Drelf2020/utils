@@ -5,20 +5,18 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-
-	"github.com/Drelf2020/utils"
 )
 
 // 请求任务
 type Job struct {
 	// GET 或 POST
-	Method string
+	Method string `form:"method" yaml:"method" json:"method"`
 	// 请求网址
-	Url string
+	Url string `form:"url" yaml:"url" json:"url"`
 	// 附带数据
-	Data map[string]string
+	Data map[string]string `form:"data" yaml:"data" json:"data"`
 	// 请求头
-	Headers map[string]string
+	Headers map[string]string `form:"headers" yaml:"headers" json:"headers"`
 }
 
 // 发送请求
@@ -47,13 +45,13 @@ func (job *Job) Request() *Result {
 	// 新建客户端
 	client := &http.Client{}
 	resp, err := client.Do(req)
-	if utils.LogErr(err) {
+	if err != nil {
 		return nil
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
-	if utils.LogErr(err) {
+	if err != nil {
 		return nil
 	}
 	return &Result{resp.StatusCode, body}
