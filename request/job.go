@@ -15,8 +15,8 @@ var ErrJsonParse = errors.New("解析 JSON 失败")
 type M map[string]string
 
 func (m *M) Scan(val any) error {
-	if val, ok := val.([]byte); ok {
-		return json.Unmarshal(val, m)
+	if val, ok := val.(string); ok {
+		return json.Unmarshal([]byte(val), m)
 	}
 	return ErrJsonParse
 }
