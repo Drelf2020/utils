@@ -1,11 +1,30 @@
 package request
 
 import (
+	"database/sql/driver"
+	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
+
+var ErrJsonParse = errors.New("解析 JSON 失败")
+
+type M map[string]string
+
+func (m *M) Scan(val any) error {
+	if val, ok := val.([]byte); ok {
+		return json.Unmarshal(val, m)
+	}
+	return ErrJsonParse
+}
+
+func (m M) Value() (driver.Value, error) {
+	b, err := json.Marshal(m)
+	return string(b), err
+}
 
 // 请求任务
 type Job struct {
@@ -14,9 +33,9 @@ type Job struct {
 	// 请求网址
 	Url string `form:"url" yaml:"url" json:"url"`
 	// 附带数据
-	Data map[string]string `form:"data" yaml:"data" json:"data"`
+	Data M `form:"data" yaml:"data" json:"data"`
 	// 请求头
-	Headers map[string]string `form:"headers" yaml:"headers" json:"headers"`
+	Headers M `form:"headers" yaml:"headers" json:"headers"`
 }
 
 // 发送请求
