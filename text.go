@@ -28,7 +28,7 @@ func Capitalize(s string) string {
 // 2(10) 左保留右不保留
 //
 // 3(11) 左右都保留
-func Slice(s, start, end string, cut int) string {
+func Cut(s, start, end string, cut int) string {
 	st := strings.Index(s, start)
 	sp := strings.LastIndex(s, end)
 	if st == -1 || sp == -1 {
