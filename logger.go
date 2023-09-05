@@ -19,7 +19,7 @@ var log = &logrus.Logger{
 	Level: logrus.DebugLevel,
 }
 
-// 获取  log
+// 获取 log
 func GetLog() *logrus.Logger {
 	return log
 }

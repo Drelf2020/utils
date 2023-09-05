@@ -2,16 +2,6 @@ package utils
 
 import "strings"
 
-// 起始匹配
-func Startswith(s, prefix string) bool {
-	return strings.HasPrefix(s, prefix)
-}
-
-// 结束匹配
-func Endswith(s, suffix string) bool {
-	return strings.HasSuffix(s, suffix)
-}
-
 // 首字母大写
 func Capitalize(s string) string {
 	return strings.ToUpper(s[:1]) + s[1:]

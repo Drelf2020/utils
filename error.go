@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"fmt"
+	"reflect"
 	"runtime"
 )
 
@@ -9,7 +11,7 @@ func CheckErr(err error) bool {
 	return err != nil
 }
 
-// 存在错误则  panic
+// 存在错误则 panic
 func PanicErr(err error) {
 	if CheckErr(err) {
 		panic(err)
@@ -28,4 +30,31 @@ func LogErr(err error) bool {
 		return true
 	}
 	return false
+}
+
+// The Try function allow you run a code in f function without catching the error.
+//
+// When an error raised, is will be automatic capture
+// and send into catch functions as a parameter.
+//
+// If there is no error, nothing will happen.
+func Try(f func(), catch ...func(error)) (e error) {
+	defer func() {
+		if r := recover(); r != nil {
+			e = fmt.Errorf("%v", r)
+			for _, c := range catch {
+				c(e)
+			}
+		}
+	}()
+	f()
+	return nil
+}
+
+// The CopyAny function copy value from the src into des.
+//
+// An error will be return when Their types are different
+// or dst can't be set.
+func CopyAny(dst, src any) error {
+	return Try(func() { reflect.ValueOf(dst).Elem().Set(reflect.ValueOf(src)) })
 }
