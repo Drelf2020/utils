@@ -26,5 +26,8 @@ func Cut(s, start, end string, cut int) string {
 	}
 	st += (cut>>1 ^ 1) * len(start)
 	sp += (cut & 1) * len(end)
+	if st > sp {
+		return ""
+	}
 	return s[st:sp]
 }
