@@ -19,6 +19,18 @@ func TestCut(t *testing.T) {
 	if utils.Cut("abc", "abc", "abc", 3) != "abc" {
 		t.Fail()
 	}
+	if utils.Cut("abc", "x", "y", 0) != "abc" {
+		t.Fail()
+	}
+	if utils.Cut("abc", "x", "y", 1) != "abc" {
+		t.Fail()
+	}
+	if utils.Cut("abc", "x", "y", 2) != "abc" {
+		t.Fail()
+	}
+	if utils.Cut("abc", "x", "y", 3) != "abc" {
+		t.Fail()
+	}
 	if utils.Cut("/", "/", "/", 0) != "" {
 		t.Fail()
 	}

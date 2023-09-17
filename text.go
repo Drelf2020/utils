@@ -21,11 +21,16 @@ func Capitalize(s string) string {
 func Cut(s, start, end string, cut int) string {
 	st := strings.Index(s, start)
 	sp := strings.LastIndex(s, end)
-	if st == -1 || sp == -1 {
-		return ""
+	if st == -1 {
+		st = 0
+	} else {
+		st += (cut>>1 ^ 1) * len(start)
 	}
-	st += (cut>>1 ^ 1) * len(start)
-	sp += (cut & 1) * len(end)
+	if sp == -1 {
+		sp = len(s)
+	} else {
+		sp += (cut & 1) * len(end)
+	}
 	if st > sp {
 		return ""
 	}
