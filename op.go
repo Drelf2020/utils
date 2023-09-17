@@ -1,6 +1,25 @@
 package utils
 
-// 过滤数组
+// If expr is true, return a.
+//
+// Otherwise return b.
+func Ternary[T any](expr bool, a, b T) T {
+	if expr {
+		return a
+	}
+	return b
+}
+
+// If expr is true, set a to the value of b.
+//
+// Otherwise do nothing.
+func Update[T any](expr bool, a *T, b T) {
+	if expr {
+		*a = b
+	}
+}
+
+// Slice Filter
 func Filter[S ~[]E, E any](s S, f func(E) bool) S {
 	r := make(S, 0, len(s))
 	for _, e := range s {
@@ -41,7 +60,7 @@ func NotNilSlice[T any, E ~[]T, S ~[]E](s S) S {
 	return NotNil[T](s)
 }
 
-// 类似 Python 的 map 函数
+// Like the map() function in Python.
 func Map[T, V any](f func(T) V, iter []T) []V {
 	v := make([]V, 0, len(iter))
 	for _, i := range iter {
@@ -50,7 +69,7 @@ func Map[T, V any](f func(T) V, iter []T) []V {
 	return v
 }
 
-// 类似 Python 的 reduce 函数
+// Like the reduce() function in Python.
 func Reduce[T, V any](f func(T, V) T, v []V, s T) T {
 	for _, e := range v {
 		s = f(s, e)
