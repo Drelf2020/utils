@@ -1,6 +1,6 @@
 module github.com/Drelf2020/utils
 
-go 1.20
+go 1.18
 
 require (
 	github.com/antonfisher/nested-logrus-formatter v1.3.1
