@@ -25,8 +25,8 @@ func GetLog() *logrus.Logger {
 }
 
 // 导出文件
-func SetOutputFile(path string) {
-	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0666)
+func SetOutputFile(path string) *logrus.Logger {
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, os.ModePerm)
 	PanicErr(err)
 	writers := []io.Writer{
 		file,
@@ -34,4 +34,15 @@ func SetOutputFile(path string) {
 	}
 	fileAndStdoutWriter := io.MultiWriter(writers...)
 	log.SetOutput(fileAndStdoutWriter)
+	return log
+}
+
+// 设置时间格式
+func SetTimestampFormat(format string) *logrus.Logger {
+	log.SetFormatter(&nested.Formatter{
+		HideKeys:        true,
+		NoColors:        true,
+		TimestampFormat: format,
+	})
+	return log
 }
