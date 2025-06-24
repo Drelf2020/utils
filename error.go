@@ -32,20 +32,25 @@ func LogErr(err error) bool {
 	return false
 }
 
-// The Try function allow you run a code in f function without catching the error.
+// Try allows you to run code in the f function without catching the error.
 //
-// When an error raised, it will be automatic capture
+// When an error is raised, it will be automatically captured
 // and send into catch functions as a parameter.
 //
 // If there is no error, nothing will happen.
 func Try(f func(), catch ...func(error)) (e error) {
 	defer func() {
-		if r := recover(); r != nil {
+		switch r := recover().(type) {
+		case nil:
+			return
+		case error:
+			e = r
+		default:
 			e = fmt.Errorf("%v", r)
-			for _, c := range catch {
-				if c != nil {
-					c(e)
-				}
+		}
+		for _, c := range catch {
+			if c != nil {
+				c(e)
 			}
 		}
 	}()
